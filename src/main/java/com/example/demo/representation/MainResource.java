@@ -1,5 +1,7 @@
 package com.example.demo.representation;
 
+import com.example.demo.domain.user.Girl;
+import com.example.demo.domain.user.Man;
 import com.example.demo.domain.user.User;
 import com.example.demo.service.users.UserServiceImpl;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,7 @@ import java.util.List;
 public class MainResource {
 
     @Inject
-    public UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getUsers() {
@@ -26,5 +28,15 @@ public class MainResource {
     public User getUserDetails(@PathVariable Long id) {
 
         return userService.getUserById(id);
+    }
+
+    @RequestMapping(value = "/mans", method = RequestMethod.GET)
+    public List<Man> getMans() {
+        return userService.getMans();
+    }
+
+    @RequestMapping(value = "/girls", method = RequestMethod.GET)
+    public List<Girl> getGirls() {
+        return userService.getGirls();
     }
 }

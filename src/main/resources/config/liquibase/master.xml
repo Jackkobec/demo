@@ -5,4 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <include file="config/liquibase/initial/users.yml"/>
+    <include file="config/liquibase/initial/mans.yml"/>
+    <include file="config/liquibase/initial/girls.yml"/>
+    <include file="config/liquibase/initial/man_girls.yml"/>
 </databaseChangeLog>
