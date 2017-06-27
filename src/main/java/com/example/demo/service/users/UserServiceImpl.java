@@ -6,15 +6,18 @@ import com.example.demo.domain.user.User;
 import com.example.demo.persistent.user.GirlsRepository;
 import com.example.demo.persistent.user.MansRepository;
 import com.example.demo.persistent.user.UsersRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 
-@Service
+@Service // declare this class as @Component - @Service
 @Transactional(rollbackFor = Throwable.class)// rollback when exception or error
 public class UserServiceImpl implements UserService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     @Inject
     public UsersRepository usersRepository;
