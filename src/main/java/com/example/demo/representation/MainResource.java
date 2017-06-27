@@ -29,7 +29,7 @@ public class MainResource {
 
     // Additional url /detail/{id} mapping with specific http method GET. Means: "/api/users" from class + "/detail/{id}" from this method
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-    public User getUserDetails(@PathVariable Long id) { // Means @PathVariable /{id}
+    public User getUserDetails(@PathVariable Long id) { // Means variable id taken from url in /{id}
 
         return userService.getUserById(id);
     }
