@@ -11,8 +11,8 @@ import javax.persistence.Id;
 /**
  * @Author E.Kobets <e.kobets@talantarium.com>
  */
-@Data
-@NoArgsConstructor
+@Data // Getters, Setters, Equals, HashCode, Constructor for all fields
+@NoArgsConstructor // Default constructor
 @Entity // declare as Entity
 public class Man {
 

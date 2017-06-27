@@ -22,25 +22,25 @@ public class MainResource {
     @Inject // inject bean UserService(UserServiceImpl declared as @Service)
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.GET) // Additional url mapping with specific method
+    @RequestMapping(method = RequestMethod.GET) // Additional url mapping with specific http method GET
     public List<User> getUsers() {
         return userService.getUsers();
     }
 
-    // Additional url /detail/{id} mapping with specific method. Means: "/api/users" from class + "/detail/{id}" from this method
+    // Additional url /detail/{id} mapping with specific http method GET. Means: "/api/users" from class + "/detail/{id}" from this method
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-    public User getUserDetails(@PathVariable Long id) {
+    public User getUserDetails(@PathVariable Long id) { // Means @PathVariable /{id}
 
         return userService.getUserById(id);
     }
 
-    // Additional url /detail/{id} mapping with specific method. Means: "/api/users" from class + "/mans" from this method
+    // Additional url /detail/{id} mapping with specific http method GET. Means: "/api/users" from class + "/mans" from this method
     @RequestMapping(value = "/mans", method = RequestMethod.GET)
     public List<Man> getMans() {
         return userService.getMans();
     }
 
-    // Additional url /detail/{id} mapping with specific method. Means: "/api/users" from class + "/girls" from this method
+    // Additional url /detail/{id} mapping with specific http method GET. Means: "/api/users" from class + "/girls" from this method
     @RequestMapping(value = "/girls", method = RequestMethod.GET)
     public List<Girl> getGirls() {
         return userService.getGirls();

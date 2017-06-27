@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
-@NoArgsConstructor
+@Data // Getters, Setters, Equals, HashCode, Constructor for all fields
+@NoArgsConstructor // Default constructor
 @Entity // declare as Entity
 @Table(name = "users") // write table name "users"
 public class User {
