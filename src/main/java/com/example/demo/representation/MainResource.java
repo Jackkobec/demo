@@ -1,8 +1,9 @@
 package com.example.demo.representation;
 
-import com.example.demo.domain.user.Girl;
-import com.example.demo.domain.user.Man;
-import com.example.demo.domain.user.User;
+import com.example.demo.domain.Girl;
+import com.example.demo.domain.Man;
+import com.example.demo.domain.User;
+import com.example.demo.domain.dto.FioDTO;
 import com.example.demo.service.users.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,4 +46,11 @@ public class MainResource {
     public List<Girl> getGirls() {
         return userService.getGirls();
     }
+
+    @RequestMapping(value = "/fio", method = RequestMethod.GET)
+    public FioDTO getFio() {
+
+        return new FioDTO("Инокентий", "Кран", "Павлович");
+    }
 }
+

@@ -1,8 +1,8 @@
 package com.example.demo.service.users;
 
-import com.example.demo.domain.user.Girl;
-import com.example.demo.domain.user.Man;
-import com.example.demo.domain.user.User;
+import com.example.demo.domain.Girl;
+import com.example.demo.domain.Man;
+import com.example.demo.domain.User;
 import com.example.demo.persistent.user.GirlsRepository;
 import com.example.demo.persistent.user.MansRepository;
 import com.example.demo.persistent.user.UsersRepository;
