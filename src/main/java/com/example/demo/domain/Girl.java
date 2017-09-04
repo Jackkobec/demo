@@ -8,9 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * @Author E.Kobets <e.kobets@talantarium.com>
- */
+
 @Data // Getters, Setters, Equals, HashCode, Constructor for all fields
 @NoArgsConstructor // Default constructor
 @Entity // declare as Entity
