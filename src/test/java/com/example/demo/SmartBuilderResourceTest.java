@@ -15,8 +15,10 @@ import javax.inject.Inject;
 import java.nio.charset.Charset;
 
 import static com.example.demo.TestUtil.writeValueAsString;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -35,10 +37,12 @@ public class DemoApplicationTests {
     }
 
     @Test
-    public void testSmartBuilder2() throws Exception {
+    public void testSmartBuilder() throws Exception {
+
+        String expectedName = "Name";
 
         PerfectDTO perfectDTO = PerfectDTO.build(p ->
-                p.smartSetName("Name"));
+                p.smartSetName(expectedName));
 
         mockMvc.perform(post(Constants.API_BASE
                 + "/smartbuilder")
@@ -47,7 +51,29 @@ public class DemoApplicationTests {
                 .content(writeValueAsString(perfectDTO))
                 .contentType(CONTENT_TYPE))//return content type
                 .andDo(print())//print more info
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is(expectedName)));//compare JSON response field with value in the is(value);
+    }
+
+    @Test
+    public void testSmartBuilder2() throws Exception {
+
+        String expectedName = "Name";
+        String expectedSecondName = "SecondName";
+
+        PerfectDTO perfectDTO = PerfectDTO.build(p ->
+                p.smartSetName(expectedName).smartSetSecondName(expectedSecondName));
+
+        mockMvc.perform(post(Constants.API_BASE
+                + "/smartbuilder")
+//				.cookie(COOKIE)//cookie settings
+//				.header("authorization", "Bearer " + MANAGER_TOKEN)
+                .content(writeValueAsString(perfectDTO))
+                .contentType(CONTENT_TYPE))//return content type
+                .andDo(print())//print more info
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is(expectedName)))//compare JSON response field with value in the is(value);
+                .andExpect(jsonPath("$.secondName", is(expectedSecondName)));//compare JSON response field with value in the is(value);
     }
 }
 
