@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.domain.Constants;
-import com.example.demo.domain.PerfectDTO;
+import com.example.demo.domain.dto.PerfectDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

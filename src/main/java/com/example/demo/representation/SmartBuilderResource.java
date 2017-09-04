@@ -1,6 +1,6 @@
 package com.example.demo.representation;
 
-import com.example.demo.domain.PerfectDTO;
+import com.example.demo.domain.dto.PerfectDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
