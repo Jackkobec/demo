@@ -39,7 +39,7 @@ public class SmartBuilderResourceTest {
     @Test
     public void testSmartBuilder() throws Exception {
 
-        String expectedName = "Name";
+        final String expectedName = "Name";
 
         PerfectDTO perfectDTO = PerfectDTO.build(p ->
                 p.smartSetName(expectedName));
@@ -58,8 +58,8 @@ public class SmartBuilderResourceTest {
     @Test
     public void testSmartBuilder2() throws Exception {
 
-        String expectedName = "Name";
-        String expectedSecondName = "SecondName";
+        final String expectedName = "Name";
+        final String expectedSecondName = "SecondName";
 
         PerfectDTO perfectDTO = PerfectDTO.build(p ->
                 p.smartSetName(expectedName).smartSetSecondName(expectedSecondName));
