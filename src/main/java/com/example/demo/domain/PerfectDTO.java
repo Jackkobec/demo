@@ -2,9 +2,6 @@ package com.example.demo.domain;
 
 import java.util.function.Consumer;
 
-/**
- *
- */
 public class PerfectDTO {
 
     private String name;
