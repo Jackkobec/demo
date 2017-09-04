@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.example.demo.domain.Constants.API_BASE;
 
 @RestController
-@RequestMapping(value = "/api/smartbuilder")
+@RequestMapping(value = API_BASE + "/smartbuilder")
 public class SmartBuilderResource {
 
 

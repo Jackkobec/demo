@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.inject.Inject;
 import java.util.List;
 
+import static com.example.demo.domain.Constants.API_BASE;
+
 @RestController // means @Controller +  ResponseBody with all methods
-@RequestMapping("/api/users")// url mapping
+@RequestMapping(API_BASE + "/users")// url mapping
 public class MainResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainResource.class);
 
