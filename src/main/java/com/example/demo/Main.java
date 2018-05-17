@@ -88,10 +88,10 @@ public class Main {
     }*/
 
     /***
-     *
-     * @param forSerialize
-     * @param neededFields
-     * @return
+     * Gets map with only needed fields with values from object if they are present.
+     * @param forSerialize - object for getting fields
+     * @param neededFields - names list of the needed fields
+     * @return Map<String ,   Object>, key - needed field name , value - needed field value
      */
     public static Map<String, Object> serializeNeededFields(final Object forSerialize, final List<String> neededFields) {
 
