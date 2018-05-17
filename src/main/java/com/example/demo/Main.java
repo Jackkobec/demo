@@ -23,6 +23,7 @@ public class Main {
 
         final List<String> neededFields = Arrays.asList("name", "secondName");
         final List<String> neededFields2 = Arrays.asList("secondName");
+        final List<String> neededFields3 = Arrays.asList("secondName", "parent");
 
         System.out.println(serializeNeededFields(perfectDTO, neededFields));
         System.out.println(serializeNeededFields(perfectDTO, neededFields2));
@@ -33,6 +34,7 @@ public class Main {
         System.out.println(serializeNeededFields(true, neededFields2));
         System.out.println(serializeNeededFields(LocalDateTime.now(), neededFields2));
         System.out.println(serializeNeededFields(new Date(), neededFields2));
+        System.out.println(serializeNeededFields(perfectDTO, neededFields3));
     }
 
 //    public static LinkedHashMap<String, Object> serializeNeededFields(final Map<String, Object> fieldsWithValues, final List<String> neededFields) {
@@ -97,8 +99,8 @@ public class Main {
             return new HashMap<>();
         }
 
-        final Field[] forSerializeFields = forSerialize.getClass().getDeclaredFields();
-        return Arrays.stream(forSerializeFields)
+        final Set<Field> forSerializeFields = org.reflections.ReflectionUtils.getAllFields(forSerialize.getClass());
+        return forSerializeFields.stream()
                 .filter(forSerializeField -> neededFields.contains(forSerializeField.getName()))
                 .peek(forSerializeField -> forSerializeField.setAccessible(true))
                 .collect(Collectors.toMap(

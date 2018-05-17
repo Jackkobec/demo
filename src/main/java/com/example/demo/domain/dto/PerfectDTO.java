@@ -2,7 +2,7 @@ package com.example.demo.domain.dto;
 
 import java.util.function.Consumer;
 
-public class PerfectDTO {
+public class PerfectDTO extends Parent {
 
     private String name;
     private String secondName;
