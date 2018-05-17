@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.domain.dto.PerfectDTO;
 
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,13 @@ public class Main {
 
         System.out.println(serializeNeededFields(perfectDTO, neededFields));
         System.out.println(serializeNeededFields(perfectDTO, neededFields2));
+        System.out.println(serializeNeededFields(new Boolean(true), neededFields2));
+        System.out.println(serializeNeededFields("", neededFields2));
+        System.out.println(serializeNeededFields(2, neededFields2));
+        System.out.println(serializeNeededFields(new Character('c'), neededFields2));
+        System.out.println(serializeNeededFields(true, neededFields2));
+        System.out.println(serializeNeededFields(LocalDateTime.now(), neededFields2));
+        System.out.println(serializeNeededFields(new Date(), neededFields2));
     }
 
 //    public static LinkedHashMap<String, Object> serializeNeededFields(final Map<String, Object> fieldsWithValues, final List<String> neededFields) {
@@ -77,34 +85,32 @@ public class Main {
                 );
     }*/
 
+    /***
+     *
+     * @param forSerialize
+     * @param neededFields
+     * @return
+     */
     public static Map<String, Object> serializeNeededFields(final Object forSerialize, final List<String> neededFields) {
 
-        if(forSerialize == null || neededFields == null || neededFields.isEmpty()) {
-            return new LinkedHashMap<>();
+        if ((forSerialize == null) || (neededFields == null) || neededFields.isEmpty()) {
+            return new HashMap<>();
         }
 
         final Field[] forSerializeFields = forSerialize.getClass().getDeclaredFields();
-        final Map<String, Object> forSerializeFieldsNamesAndValues = Arrays.stream(forSerializeFields)
-                .peek(field -> field.setAccessible(true))
+        return Arrays.stream(forSerializeFields)
+                .filter(forSerializeField -> neededFields.contains(forSerializeField.getName()))
+                .peek(forSerializeField -> forSerializeField.setAccessible(true))
                 .collect(Collectors.toMap(
                         Field::getName,
-                        field -> {
+                        forSerializeField -> {
                             try {
-                                return field.get(forSerialize);
+                                return forSerializeField.get(forSerialize);
                             } catch (final IllegalAccessException e) {
-                                System.out.println("LOG");
+                                System.out.println("LOG"); // Replace with LOGGER
                                 return null;
                             }
                         })
-                );
-
-        return neededFields.stream()
-                .filter(forSerializeFieldsNamesAndValues.keySet()::contains)
-                .collect(Collectors.toMap(
-                        neededField -> neededField,
-                        neededField ->  forSerializeFieldsNamesAndValues.getOrDefault(neededField, null),
-                        (key, value) -> { throw new IllegalStateException(String.format("Duplicate key %s", key)); },
-                        LinkedHashMap::new)
                 );
     }
 }
