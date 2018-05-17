@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 /**
  * @Author Jack <e.kobets>
- * 5/17/18
  */
 public class Main {
     public static void main(String[] args) {
@@ -19,16 +18,16 @@ public class Main {
 //            put("middleName", "Pavlovich");
 //        }};
 
-        PerfectDTO perfectDTO = new PerfectDTO("Vasa", "Kran", "Petrovich");
+        final PerfectDTO perfectDTO = new PerfectDTO("Vasa", "Kran", "Petrovich");
 
-        final List<String> neededFileds = Arrays.asList("name", "secondName");
-        final List<String> neededFileds2 = Arrays.asList("secondName");
+        final List<String> neededFields = Arrays.asList("name", "secondName");
+        final List<String> neededFields2 = Arrays.asList("secondName");
 
-        System.out.println(serialize(perfectDTO, neededFileds));
-        System.out.println(serialize(perfectDTO, neededFileds2));
+        System.out.println(serializeNeededFields(perfectDTO, neededFields));
+        System.out.println(serializeNeededFields(perfectDTO, neededFields2));
     }
 
-//    public static LinkedHashMap<String, Object> serialize(final Map<String, Object> fieldsWithValues, final List<String> neededFields) {
+//    public static LinkedHashMap<String, Object> serializeNeededFields(final Map<String, Object> fieldsWithValues, final List<String> neededFields) {
 //
 //        final Field[] allDtoFields = PerfectDTO.class.getDeclaredFields();
 //        List<String> fieldNames = Arrays.stream(allDtoFields).map(field ->
@@ -48,18 +47,20 @@ public class Main {
 //                );
 //    }
 
-    public static LinkedHashMap<String, Object> serialize(final Object forSerialize, final List<String> neededFields) {
+    public static LinkedHashMap<String, Object> serializeNeededFields(final Object forSerialize, final List<String> neededFields) {
+
+        if(forSerialize == null || neededFields == null || neededFields.isEmpty()) {
+            return new LinkedHashMap<>();
+        }
 
         final Field[] forSerializeFields = forSerialize.getClass().getDeclaredFields();
-        List<String> fieldNames = Arrays.stream(forSerializeFields).map(field ->
-        {
+        final List<String> forSerializeFieldsNames = Arrays.stream(forSerializeFields).map(field -> {
             field.setAccessible(true);
             return field.getName();
-        })
-                .collect(Collectors.toList());
+        }).collect(Collectors.toList());
 
         return neededFields.stream()
-                .filter(fieldNames::contains)
+                .filter(forSerializeFieldsNames::contains)
                 .collect(Collectors.toMap(
                         neededField -> neededField,
                         neededField -> {
