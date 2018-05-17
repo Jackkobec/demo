@@ -11,6 +11,12 @@ public class PerfectDTO {
     private PerfectDTO() {
     }
 
+    public PerfectDTO(String name, String secondName, String middleName) {
+        this.name = name;
+        this.secondName = secondName;
+        this.middleName = middleName;
+    }
+
     public String getName() {
         return name;
     }
